@@ -4,12 +4,14 @@
 #
 # Copyright 2013 Marín Ferrari <tincho@tincho.org>
 #
-# Based on rss2email, Copyright 2004 Aaron Swartz, and licensed under the terms
-# of version 2 or 3 of the GNU GPL; with contributions from:
-# Dean Jackson, Brian Lalor, Joey Hess, Matej Cepl, Martin 'Joey' Schulze,
-# Marcel Ackermann (http://www.DreamFlasher.de), Lindsey Smith (maintainer),
-# and Erik Hetzner.
+# This program is loosely based on rss2email, which is Copyright 2004 Aaron
+# Swartz, and licensed under the terms of version 2 or 3 of the GNU GPL; with
+# contributions from: Dean Jackson, Brian Lalor, Joey Hess, Matej Cepl, Martin
+# 'Joey' Schulze, Marcel Ackermann (http://www.DreamFlasher.de), Lindsey Smith
+# (maintainer), and Erik Hetzner.
 #
+# Having said that, this code is written from scratch, and therefore, not a
+# derived work.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,22 +28,14 @@
 """postfeed: RSS reader by post
 
 Postfeed tracks RSS feeds and posts updates to your email.
-Based on rss2feed, (C) 2004 Aaron Swartz.
 """
-__version__ = "1.0"
+__version__ = "0.1"
 __author__ = "Martín Ferrari <tincho@tincho.org>"
 __copyright__ = "(C) 2013 Martín Ferrari"
-___contributors__ = ["Dean Jackson", "Brian Lalor", "Joey Hess",
-                     "Matej Cepl", "Martin 'Joey' Schulze",
-                     "Marcel Ackermann (http://www.DreamFlasher.de)",
-                     "Lindsey Smith", "Erik Hetzner",
-                     "Aaron Swartz (original author)"
-                     ]
 
 
 import argparse
 #from email.mime.text import MIMEText
-import email.header
 #import email.utils
 import fcntl
 import feedparser
@@ -712,11 +706,3 @@ def do_opmlimport(): pass
 
 if __name__ == '__main__':
     main()
-
-
-class Header(email.header.Header):
-    # Work-around for <http://bugs.python.org/issue5871>
-    def append(self, s=None, *args, **kwargs):
-        if s is not None:
-            s = s.replace('\n', ' ').replace('\r', ' ')
-            email.Header.append(self, s, *args, **kwargs)
